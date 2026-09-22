@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- For now, just use a hardcoded dataset -->
+
+    <main class="weather-page">
+
+        <div class="weather-card">
+
+            <!-- Top section -->
+            <div class="top-section">
+                <div class="date-info">
+                    <p class="date">Today, 12 June</p>
+                    <p class="current-time">Current Weather 8:00 PM</p>
+                </div>
+
+                <div class="temperature-info">
+                    <span class="temperature">21°</span>
+                    <span class="location">in Seremban, today</span>
+                </div>
+            </div>
+
+            <!-- Current condition -->
+            <div class="condition">
+                <span class="weather-icon">☁</span>
+                <span class="condition-text">Rainy Day</span>
+            </div>
+
+            <!-- Today's details -->
+            <div class="details-card">
+
+                <div class="detail-column">
+                    <div class="detail-item">
+                        <span class="label">Sunrise at</span>
+                        <span class="value" id="sunrise">--:--</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">Sunset at</span>
+                        <span class="value" id="sunset">--:--</span>
+                    </div>
+                </div>
+
+                <div class="detail-column">
+                    <div class="detail-item">
+                        <span class="label">Min temp:</span>
+                        <span class="value" id="min-temp">--°</span>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="label">Max temp:</span>
+                        <span class="value" id="max-temp">--°</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Tomorrow / hourly section -->
+            <div class="tomorrow-card">
+                <div class="tomorrow-title">Tomorrow</div>
+
+                <div class="hourly-preview">
+                    <div class="hour">
+                        <span class="hour-time">0:00</span>
+                        <span class="hour-temp" id="hour-temp">--°</span>
+                    </div>
+
+                    <!-- Add more hourly items here later -->
+                    <!--
+                    <div class="hour">
+                        <span class="hour-time">1:00</span>
+                        <span class="hour-temp">--°</span>
+                    </div>
+                    -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
