@@ -116,10 +116,10 @@ weather-app/
 Work in progress
 
 Future Improvements:
-    Complete hourly forecast
-    Add sunrise and sunset
-    Add minimum and maximum temperature
-    Add humidity and wind information
-    Add location search
-    Improve error handling
-    Deploy the application
+- Complete hourly forecast
+- Add sunrise and sunset
+- Add minimum and maximum temperature
+- Add humidity and wind information
+- Add location search
+- Improve error handling
+- Deploy the application
