@@ -97,20 +97,6 @@ current
 hourly
 daily
 
-## Project Structure
-
-weather-app/
-├── flaskr/
-│   ├── __init__.py
-│   ├── templates/
-│   │   └── index.html
-│   └── static/
-│       ├── index.css
-│       ├── index.js
-│       └── background.jpg
-│
-└── README.md
-
 ## Project Status
 
 Work in progress
