@@ -47,7 +47,7 @@ def create_app(test_config=None):
             "daily": ["sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"],
             "hourly": ["temperature_2m", "rain"],
             "models": "dwd_icon_seamless",
-            "current": ["relative_humidity_2m", "temperature_2m", "is_day", "rain", "precipitation", "weather_code"],
+            "current": ["relative_humidity_2m", "temperature_2m", "is_day", "weather_code", "apparent_temperature"],
             "timezone": "Asia/Singapore",
             "forecast_days": 1,
         }
@@ -61,18 +61,16 @@ def create_app(test_config=None):
         current_relative_humidity_2m = current.Variables(0).Value()
         current_temperature_2m = current.Variables(1).Value()
         current_is_day = current.Variables(2).Value()
-        current_rain = current.Variables(3).Value()
-        current_precipitation = current.Variables(4).Value()
-        current_weather_code = current.Variables(5).Value()
+        current_weather_code = current.Variables(3).Value()
+        current_apparent_temperature = current.Variables(4).Value()
 
         return jsonify({
             "current_time": current.Time(), 
             "relative_humidity_2m": current_relative_humidity_2m,
             "temperature_2m": current_temperature_2m,
             "is_day": current_is_day,
-            "rain": current_rain,
-            "precipitation": current_precipitation,
-            "weather_code": current_weather_code
+            "weather_code": current_weather_code,
+            "apparent_temperature": current_apparent_temperature
         })
 
     return app

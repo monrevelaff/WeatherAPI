@@ -59,15 +59,57 @@ function getWeatherDescription(code) {
     }
 }
 
+function getDayNight(isDay) {
+    if (isDay === 1) {
+        return 'Day';
+    } else {
+        return 'Night';
+    }
+}
+
+function getWeatherIcon(code, isDay) {
+
+    if (code === 0) {
+        return isDay === 1 ? '☀️' : '🌙';
+
+    } else if (code === 1) {
+        return isDay === 1 ? '🌤️' : '🌙';
+
+    } else if (code === 2) {
+        return '⛅';
+
+    } else if (code === 3) {
+        return '☁️';
+
+    } else if (code === 45 || code === 48) {
+        return '🌫️';
+
+    } else if (code >= 51 && code <= 57) {
+        return '🌦️';
+
+    } else if (code >= 61 && code <= 67) {
+        return '🌧️';
+
+    } else if (code >= 71 && code <= 77) {
+        return '❄️';
+
+    } else if (code >= 80 && code <= 82) {
+        return '🌧️';
+
+    } else if (code === 85 || code === 86) {
+        return '🌨️';
+
+    } else if (code >= 95 && code <= 99) {
+        return '⛈️';
+
+    } else {
+        return '❓';
+    }
+}
+
 fetch('/api/weather')
     .then(response => response.json())
     .then(data => {
-
-        console.log(data.weather_code);
-        const description = getWeatherDescription(data.weather_code);
-        document.getElementById('temperature').textContent =
-            data.temperature_2m.toFixed(0) + '°';
-        document.getElementById('condition-text').textContent = description;
 
         // Date and current time
         const now = new Date();
@@ -87,4 +129,20 @@ fetch('/api/weather')
 
         document.getElementById('current-time').textContent =
             `Current Time ${time}`;
+
+
+        const description = getWeatherDescription(data.weather_code);
+        const dayNight = getDayNight(data.is_day);
+        const icon = getWeatherIcon(data.weather_code, data.is_day);
+
+        console.log(data.weather_code);
+        console.log(data.is_day);
+
+        document.getElementById('weather-icon').textContent = icon;
+        document.getElementById('weather-condition').textContent = description;
+        document.getElementById('day-night').textContent = dayNight;
+        document.getElementById('temperature').textContent = data.temperature_2m.toFixed(0) + '°';    
+        document.getElementById('apparent-temperature').textContent = 
+        data.apparent_temperature.toFixed(0) + '°';
+       
     });

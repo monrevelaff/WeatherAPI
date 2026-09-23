@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Weather App</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
@@ -10,85 +12,241 @@
 
 <body>
 
-    <!-- For now, just use a hardcoded dataset -->
-
     <main class="weather-page">
 
         <div class="weather-card">
 
-            <!-- Top section -->
-            <div class="top-section">
+            <!-- =========================
+                 HEADER
+            ========================== -->
+            <header class="weather-header">
+
                 <div class="date-info">
                     <p class="date" id="date">Current Date</p>
-                    <p class="current-time" id="current-time">Current Time</p>
+                    <p class="current-time" id="current-time">
+                        Current Time
+                    </p>
                 </div>
 
-                <div class="temperature-info">
-                    <span class="temperature" id="temperature">—</span>
-                    <span class="location">in Seremban, today</span>
-                </div>
-            </div>
+            </header>
 
-            <!-- Current condition -->
-            <div class="condition">
-                <span class="weather-icon" id="weather-icon">☁</span>
-                <span class="condition-text" id="condition-text">—</span>
-            </div>
 
-            <!-- Today's details -->
-            <div class="details-card">
+            <!-- =========================
+                 MAIN WEATHER
+            ========================== -->
+            <section class="current-weather">
 
-                <div class="detail-column">
-                    <div class="detail-item">
-                        <span class="label">Sunrise at</span>
-                        <span class="value" id="sunrise">—</span>
-                    </div>
-
-                    <div class="detail-item">
-                        <span class="label">Sunset at</span>
-                        <span class="value" id="sunset">—</span>
-                    </div>
+                <div class="weather-icon" id="weather-icon">
+                    —
                 </div>
 
-                <div class="detail-column">
-                    <div class="detail-item">
-                        <span class="label">Min temp:</span>
-                        <span class="value" id="min-temp">°</span>
-                    </div>
-
-                    <div class="detail-item">
-                        <span class="label">Max temp:</span>
-                        <span class="value" id="max-temp">°</span>
-                    </div>
+                <div class="condition-text" id="weather-condition">
+                    Loading...
                 </div>
 
-            </div>
+                <div class="day-night" id="day-night">
+                    —
+                </div>
 
-            <!-- Tomorrow / hourly section -->
-            <div class="tomorrow-card">
-                <div class="tomorrow-title">Tomorrow</div>
+                <div class="temperature" id="temperature">
+                    —°
+                </div>
+
+                <div class="feels-like">
+                    Feels like
+                    <span id="apparent-temperature">No available data</span>
+                </div>
+
+                <div class="location">
+                    Seremban, Malaysia
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 TODAY'S DETAILS
+            ========================== -->
+            <section class="details-card">
+
+                <!-- Sunrise -->
+                <div class="weather-detail">
+
+                    <div class="detail-icon">
+                        🌅
+                    </div>
+
+                    <div class="detail-info">
+                        <span class="label">
+                            Sunrise
+                        </span>
+
+                        <span class="value" id="sunrise">
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- Sunset -->
+                <div class="weather-detail">
+
+                    <div class="detail-icon">
+                        🌇
+                    </div>
+
+                    <div class="detail-info">
+                        <span class="label">
+                            Sunset
+                        </span>
+
+                        <span class="value" id="sunset">
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- Minimum temperature -->
+                <div class="weather-detail">
+
+                    <div class="detail-icon">
+                        ↓
+                    </div>
+
+                    <div class="detail-info">
+                        <span class="label">
+                            Low
+                        </span>
+
+                        <span class="value" id="min-temp">
+                            —°
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- Maximum temperature -->
+                <div class="weather-detail">
+
+                    <div class="detail-icon">
+                        ↑
+                    </div>
+
+                    <div class="detail-info">
+                        <span class="label">
+                            High
+                        </span>
+
+                        <span class="value" id="max-temp">
+                            —°
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 TOMORROW / HOURLY
+            ========================== -->
+            <section class="tomorrow-card">
+
+                <div class="tomorrow-header">
+                    <h2>Tomorrow</h2>
+                </div>
 
                 <div class="hourly-preview">
+
                     <div class="hour">
-                        <span class="hour-time">0:00</span>
-                        <span class="hour-temp" id="hour-temp">°</span>
+                        <span class="hour-time">
+                            12 AM
+                        </span>
+
+                        <span class="hour-icon">
+                            🌧️
+                        </span>
+
+                        <span class="hour-temp" id="hour-temp">
+                            —°
+                        </span>
                     </div>
 
-                    <!-- Add more hourly items (future) -->
-                    <!--
+
                     <div class="hour">
-                        <span class="hour-time">1:00</span>
-                        <span class="hour-temp">°</span>
+                        <span class="hour-time">
+                            3 AM
+                        </span>
+
+                        <span class="hour-icon">
+                            🌧️
+                        </span>
+
+                        <span class="hour-temp">
+                            —°
+                        </span>
                     </div>
-                    -->
+
+
+                    <div class="hour">
+                        <span class="hour-time">
+                            6 AM
+                        </span>
+
+                        <span class="hour-icon">
+                            ☁️
+                        </span>
+
+                        <span class="hour-temp">
+                            —°
+                        </span>
+                    </div>
+
+
+                    <div class="hour">
+                        <span class="hour-time">
+                            9 AM
+                        </span>
+
+                        <span class="hour-icon">
+                            🌤️
+                        </span>
+
+                        <span class="hour-temp">
+                            —°
+                        </span>
+                    </div>
+
+
+                    <div class="hour">
+                        <span class="hour-time">
+                            12 PM
+                        </span>
+
+                        <span class="hour-icon">
+                            ☀️
+                        </span>
+
+                        <span class="hour-temp">
+                            —°
+                        </span>
+                    </div>
+
                 </div>
-            </div>
+
+            </section>
 
         </div>
 
     </main>
 
+
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 
 </body>
+
 </html>

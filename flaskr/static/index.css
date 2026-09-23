@@ -56,7 +56,7 @@ body {
     width: 100%;
     max-width: 465px;
 
-    padding: 38px 26px 32px;
+    padding: 32px 26px 26px;
 
     border-radius: 30px;
 
@@ -75,85 +75,130 @@ body {
 
 
 /* ==============================
-   TOP SECTION
+   HEADER
    ============================== */
 
-.top-section {
+.weather-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
 
-    gap: 20px;
+    justify-content: center;
 
-    padding: 8px 8px 0;
+    text-align: center;
+
+    padding: 4px 8px 0;
 }
 
 .date-info {
-    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
 }
 
 .date {
     font-size: 17px;
     font-weight: 600;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .current-time {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
 
-    color: rgba(255, 255, 255, 0.95);
-}
-
-.temperature-info {
-    display: flex;
-    flex-direction: column;
-
-    align-items: flex-end;
-
-    text-align: right;
-}
-
-.temperature {
-    font-size: 56px;
-    line-height: 1;
-
-    font-weight: 400;
-}
-
-.location {
-    margin-top: 8px;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 
 /* ==============================
-   CURRENT CONDITION
+   CURRENT WEATHER
    ============================== */
 
-.condition {
+.current-weather {
     display: flex;
+    flex-direction: column;
+
     align-items: center;
 
-    gap: 10px;
+    text-align: center;
 
     margin-top: 28px;
-    margin-left: 8px;
-
-    font-size: 25px;
 }
+
+
+/* Weather icon */
 
 .weather-icon {
-    font-size: 25px;
+    font-size: 58px;
+
+    line-height: 1;
+
+    margin-bottom: 12px;
 }
 
+
+/* Weather condition */
+
 .condition-text {
-    font-weight: 400;
+    font-size: 21px;
+
+    font-weight: 500;
+
+    margin-bottom: 5px;
+}
+
+
+/* Day / night */
+
+.day-night {
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.75);
+
+    margin-bottom: 18px;
+}
+
+
+/* Main temperature */
+
+.temperature {
+    font-size: 72px;
+
+    line-height: 1;
+
+    font-weight: 300;
+
+    letter-spacing: -2px;
+}
+
+
+/* Feels like */
+
+.feels-like {
+    margin-top: 9px;
+
+    font-size: 14px;
+
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.feels-like span {
+    font-weight: 600;
+}
+
+
+/* Location */
+
+.current-weather .location {
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.9);
 }
 
 
@@ -163,46 +208,76 @@ body {
 
 .details-card {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
 
-    gap: 20px;
+    gap: 1px;
 
-    margin-top: 30px;
+    margin-top: 28px;
 
-    padding: 15px 20px;
+    border-radius: 18px;
 
-    min-height: 106px;
+    overflow: hidden;
 
-    border-radius: 17px;
-
-    background: rgba(210, 210, 210, 0.35);
+    background: rgba(255, 255, 255, 0.12);
 
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.detail-column {
-    display: flex;
-    flex-direction: column;
 
-    justify-content: space-between;
+/* Individual detail */
+
+.weather-detail {
+    display: flex;
+
+    align-items: center;
 
     gap: 12px;
+
+    padding: 15px 17px;
+
+    background: rgba(210, 210, 210, 0.25);
 }
 
-.detail-item {
+
+/* Icon */
+
+.detail-icon {
+    width: 28px;
+
+    font-size: 19px;
+
+    text-align: center;
+}
+
+
+/* Text container */
+
+.detail-info {
     display: flex;
+
     flex-direction: column;
 
-    gap: 4px;
+    gap: 3px;
 }
+
+
+/* Label */
 
 .label {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 12px;
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.7);
 }
 
+
+/* Value */
+
 .value {
-    font-size: 16px;
+    font-size: 15px;
+
     font-weight: 600;
 }
 
@@ -214,44 +289,88 @@ body {
 .tomorrow-card {
     margin-top: 15px;
 
-    min-height: 106px;
+    padding: 17px 18px;
 
-    padding: 17px 20px;
+    border-radius: 18px;
 
-    border-radius: 17px;
-
-    background: rgba(210, 210, 210, 0.35);
+    background: rgba(210, 210, 210, 0.25);
 
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.tomorrow-title {
-    font-size: 16px;
-    font-weight: 600;
 
-    margin-bottom: 6px;
+/* Tomorrow title */
+
+.tomorrow-header {
+    margin-bottom: 14px;
 }
+
+.tomorrow-header h2 {
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* Hourly row */
 
 .hourly-preview {
     display: flex;
 
-    gap: 20px;
+    gap: 24px;
 
     overflow-x: auto;
+
+    padding-bottom: 3px;
+
+    scrollbar-width: none;
 }
+
+.hourly-preview::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Individual hour */
 
 .hour {
+    min-width: 45px;
+
     display: flex;
+
     flex-direction: column;
 
-    gap: 5px;
+    align-items: center;
 
-    min-width: 55px;
+    gap: 7px;
 }
 
-.hour-time,
+
+/* Hour time */
+
+.hour-time {
+    font-size: 11px;
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Hour icon */
+
+.hour-icon {
+    font-size: 20px;
+
+    line-height: 1;
+}
+
+
+/* Hour temperature */
+
 .hour-temp {
-    font-size: 15px;
+    font-size: 13px;
+
     font-weight: 600;
 }
 
@@ -266,41 +385,74 @@ body {
         padding: 15px;
     }
 
+
     .weather-card {
-        padding: 30px 20px 25px;
+        padding: 28px 18px 22px;
 
         border-radius: 25px;
     }
 
-    .top-section {
-        padding-left: 4px;
-        padding-right: 4px;
-    }
 
     .date {
         font-size: 15px;
     }
 
+
     .current-time {
         font-size: 12px;
     }
 
-    .temperature {
-        font-size: 48px;
+
+    .weather-icon {
+        font-size: 50px;
     }
 
-    .condition {
-        margin-left: 4px;
-        font-size: 22px;
+
+    .condition-text {
+        font-size: 19px;
     }
+
+
+    .temperature {
+        font-size: 62px;
+    }
+
 
     .details-card {
-        padding: 14px 16px;
-        gap: 12px;
+        grid-template-columns: 1fr 1fr;
     }
 
-    .label,
+
+    .weather-detail {
+        padding: 13px 12px;
+
+        gap: 8px;
+    }
+
+
+    .detail-icon {
+        font-size: 17px;
+
+        width: 23px;
+    }
+
+
+    .label {
+        font-size: 11px;
+    }
+
+
     .value {
         font-size: 14px;
+    }
+
+
+    .tomorrow-card {
+        padding: 15px;
+    }
+
+
+    .hourly-preview {
+        gap: 20px;
     }
 }
