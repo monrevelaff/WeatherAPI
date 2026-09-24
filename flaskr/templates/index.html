@@ -8,6 +8,7 @@
     <title>Weather App</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
 </head>
 
 <body>
@@ -36,8 +37,8 @@
             ========================== -->
             <section class="current-weather">
 
-                <div class="weather-icon" id="weather-icon">
-                    —
+                <div class="weather-icon">
+                    <i id="weather-icon" class="wi"></i>
                 </div>
 
                 <div class="condition-text" id="weather-condition">
@@ -48,13 +49,15 @@
                     —
                 </div>
 
-                <div class="temperature" id="temperature">
-                    —°
+                <div class="temperature">
+                    <span id="temperature">—</span>
+                    <i class="wi wi-celsius"></i>
                 </div>
 
                 <div class="feels-like">
                     Feels like
-                    <span id="apparent-temperature">No available data</span>
+                    <span id="apparent-temperature">—</span>
+                    <i class="wi wi-celsius"></i>
                 </div>
 
                 <div class="location">
@@ -65,7 +68,7 @@
 
 
             <!-- =========================
-                 TODAY'S DETAILS
+                 DAILY DETAILS
             ========================== -->
             <section class="details-card">
 
@@ -73,7 +76,7 @@
                 <div class="weather-detail">
 
                     <div class="detail-icon">
-                        🌅
+                        <i class="wi wi-sunrise"></i>
                     </div>
 
                     <div class="detail-info">
@@ -82,7 +85,7 @@
                         </span>
 
                         <span class="value" id="sunrise">
-                            —
+                            No data available
                         </span>
                     </div>
 
@@ -93,7 +96,7 @@
                 <div class="weather-detail">
 
                     <div class="detail-icon">
-                        🌇
+                        <i class="wi wi-sunset"></i>
                     </div>
 
                     <div class="detail-info">
@@ -102,7 +105,7 @@
                         </span>
 
                         <span class="value" id="sunset">
-                            —
+                            No data available
                         </span>
                     </div>
 
@@ -113,7 +116,7 @@
                 <div class="weather-detail">
 
                     <div class="detail-icon">
-                        ↓
+                        <i class="wi wi-direction-down"></i>
                     </div>
 
                     <div class="detail-info">
@@ -121,8 +124,9 @@
                             Low
                         </span>
 
-                        <span class="value" id="min-temp">
-                            —°
+                        <span class="value">
+                            <span id="min-temp">—</span>
+                            <i class="wi wi-celsius"></i>
                         </span>
                     </div>
 
@@ -133,7 +137,7 @@
                 <div class="weather-detail">
 
                     <div class="detail-icon">
-                        ↑
+                        <i class="wi wi-direction-up"></i>
                     </div>
 
                     <div class="detail-info">
@@ -141,8 +145,9 @@
                             High
                         </span>
 
-                        <span class="value" id="max-temp">
-                            —°
+                        <span class="value">
+                            <span id="max-temp">—</span>
+                            <i class="wi wi-celsius"></i>
                         </span>
                     </div>
 
@@ -164,7 +169,8 @@
 
                     <div class="hour">
                         <span class="hour-time">
-                            12 AM
+                            <i class="wi wi-time-12"></i>
+                            <span>12 AM</span>
                         </span>
 
                         <span class="hour-icon">
@@ -172,14 +178,15 @@
                         </span>
 
                         <span class="hour-temp" id="hour-temp">
-                            —°
+                            No data available
                         </span>
                     </div>
 
 
                     <div class="hour">
                         <span class="hour-time">
-                            3 AM
+                            <i class="wi wi-time-3"></i>
+                            <span>3 AM</span>
                         </span>
 
                         <span class="hour-icon">
@@ -187,14 +194,15 @@
                         </span>
 
                         <span class="hour-temp">
-                            —°
+                            No data available
                         </span>
                     </div>
 
 
                     <div class="hour">
                         <span class="hour-time">
-                            6 AM
+                            <i class="wi wi-time-6"></i>
+                            <span>6 AM</span>
                         </span>
 
                         <span class="hour-icon">
@@ -202,14 +210,15 @@
                         </span>
 
                         <span class="hour-temp">
-                            —°
+                            No data available
                         </span>
                     </div>
 
 
                     <div class="hour">
                         <span class="hour-time">
-                            9 AM
+                            <i class="wi wi-time-9"></i>
+                            <span>9 AM</span>
                         </span>
 
                         <span class="hour-icon">
@@ -217,14 +226,15 @@
                         </span>
 
                         <span class="hour-temp">
-                            —°
+                            No data available
                         </span>
                     </div>
 
 
                     <div class="hour">
                         <span class="hour-time">
-                            12 PM
+                            <i class="wi wi-time-12"></i>
+                            <span>12 PM</span>
                         </span>
 
                         <span class="hour-icon">
@@ -232,7 +242,7 @@
                         </span>
 
                         <span class="hour-temp">
-                            —°
+                            No data available
                         </span>
                     </div>
 

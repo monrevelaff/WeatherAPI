@@ -70,40 +70,52 @@ function getDayNight(isDay) {
 function getWeatherIcon(code, isDay) {
 
     if (code === 0) {
-        return isDay === 1 ? '☀️' : '🌙';
+        return isDay === 1 ? 'wi-day-sunny' : 'wi-night-clear';
 
     } else if (code === 1) {
-        return isDay === 1 ? '🌤️' : '🌙';
+        return isDay === 1 ? 'wi-day-sunny-overcast' : 'wi-night-alt-cloudy';
 
     } else if (code === 2) {
-        return '⛅';
+        return isDay === 1 ? 'wi-day-cloudy' : 'wi-night-alt-cloudy';
 
     } else if (code === 3) {
-        return '☁️';
+        return 'wi-cloudy';
 
     } else if (code === 45 || code === 48) {
-        return '🌫️';
+        return 'wi-fog';
 
-    } else if (code >= 51 && code <= 57) {
-        return '🌦️';
+    } else if (code >= 51 && code <= 53) {
+        return 'wi-sprinkle';
 
-    } else if (code >= 61 && code <= 67) {
-        return '🌧️';
+    } else if (code === 55) {
+        return 'wi-rain';
+
+    } else if (code === 56 || code === 57) {
+        return 'wi-sleet';
+
+    } else if (code >= 61 && code <= 65) {
+        return 'wi-rain';
+
+    } else if (code === 66 || code === 67) {
+        return 'wi-rain-mix';
 
     } else if (code >= 71 && code <= 77) {
-        return '❄️';
+        return 'wi-snow';
 
     } else if (code >= 80 && code <= 82) {
-        return '🌧️';
+        return 'wi-showers';
 
     } else if (code === 85 || code === 86) {
-        return '🌨️';
+        return 'wi-snow';
 
-    } else if (code >= 95 && code <= 99) {
-        return '⛈️';
+    } else if (code === 95) {
+        return 'wi-thunderstorm';
+
+    } else if (code === 96 || code === 99) {
+        return 'wi-hail';
 
     } else {
-        return '❓';
+        return 'wi-na';
     }
 }
 
@@ -138,11 +150,22 @@ fetch('/api/weather')
         console.log(data.weather_code);
         console.log(data.is_day);
 
-        document.getElementById('weather-icon').textContent = icon;
+        document.getElementById('weather-icon').className = `wi ${icon}`;
         document.getElementById('weather-condition').textContent = description;
         document.getElementById('day-night').textContent = dayNight;
-        document.getElementById('temperature').textContent = data.temperature_2m.toFixed(0) + '°';    
+        document.getElementById('temperature').textContent = data.temperature_2m.toFixed(0);  
         document.getElementById('apparent-temperature').textContent = 
-        data.apparent_temperature.toFixed(0) + '°';
+        data.apparent_temperature.toFixed(0);
        
+
+        // Update daily details
+        const sunriseTime = new Date(data.sunrise);
+        const sunsetTime = new Date(data.sunset);
+        const sunriseFormatted = sunriseTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        const sunsetFormatted = sunsetTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+        document.getElementById('sunrise').textContent = sunriseFormatted;
+        document.getElementById('sunset').textContent = sunsetFormatted;
+        document.getElementById('max-temp').textContent = data.temperature_2m_max.toFixed(0);
+        document.getElementById('min-temp').textContent = data.temperature_2m_min.toFixed(0);
     });
