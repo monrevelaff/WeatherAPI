@@ -121,6 +121,8 @@ current
 hourly
 daily
 
+```
+
 ## Future Improvements
 
 Possible future improvements include:
