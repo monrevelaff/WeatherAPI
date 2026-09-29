@@ -5,7 +5,7 @@ This project is being developed as a personal learning project to practise worki
 
 ## Screenshot
 
-![WeatherAPI screenshot](screenshots/weather-app.png)
+![WeatherAPI screenshot](flaskr/screenshots/weather-app.png)
 
 ## Features
 
