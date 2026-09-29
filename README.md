@@ -3,6 +3,10 @@ A personal weather web application built with **Python, Flask, JavaScript, HTML,
 
 This project is being developed as a personal learning project to practise working with APIs, backend development, frontend JavaScript, and building a responsive web interface.
 
+## Screenshot
+
+![WeatherAPI screenshot](screenshots/weather-app.png)
+
 ## Features
 
 ### Current Weather
