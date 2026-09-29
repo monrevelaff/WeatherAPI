@@ -177,20 +177,12 @@ fetch('/api/weather')
         const hourlyPrecipitation = data.hourly_precipitation_probability;
         const hourlyWeatherCodes = data.hourly_weather_code;
 
-        const hourlyForecastData = hourlyTimes.map((time, index) => {
-            time = time.replace(' ', 'T'); // Convert to ISO format
-            const temperature = hourlyTemperatures[index];
-            const precipitation = hourlyPrecipitation[index];
-            const weatherCode = hourlyWeatherCodes[index];
-            return { time, temperature, precipitation, weatherCode };
-        });
-
-        const selectedHourlyData = hourlyForecastData.filter(item => {
-            const date = new Date(item.time);
-            const hour = date.getHours();
-            return hour % 3 === 0;
-        })
-        .slice(0, 9); // Limit to the first 9 items (covering 24 hours)
+        const selectedHourlyData = hourlyTimes.map((time, index) => ({
+            time: time,
+            temperature: hourlyTemperatures[index],
+            precipitation: hourlyPrecipitation[index],
+            weatherCode: hourlyWeatherCodes[index]
+        })).filter((item, index) => index % 3 === 0).slice(0, 9); // Select every 3rd hour
 
         // Display hourly forecast
         const hourlyContainer = document.getElementById('hourly-forecast');
@@ -198,20 +190,69 @@ fetch('/api/weather')
         hourlyContainer.innerHTML = '';
 
         selectedHourlyData.forEach(item => {
-            const date = new Date(item.time);
 
-            const hour = date.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                hour12: true
-            });
+            const forecastDate = new Date(item.time);
+            // Format forecast hour
+            const forecastHour =
+                forecastDate.toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    hour12: true
+                });
 
-            const iconClass = getWeatherIcon(item.weatherCode, 1);
+            // Check if the forecast hour is for the next day (12 AM)
+
+            const isNextDay =
+                forecastDate.getHours() === 0 &&
+                (
+                    forecastDate.getFullYear() !== now.getFullYear() ||
+                    forecastDate.getMonth() !== now.getMonth() ||
+                    forecastDate.getDate() !== now.getDate()
+                );
+
+
+            // Format tomorrow's date,
+            const nextDayDate =
+                forecastDate.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short'
+                });
+
+            // Determine day/night icon
+
+            let hourlyIsDay;
+
+            if (isNextDay) {
+
+                // The only next-day forecast displayed
+                // is 12 AM, so it is nighttime.
+                hourlyIsDay = 0;
+
+            } else {
+
+                // For today's forecast, compare the
+                // forecast time with today's sunrise
+                // and sunset.
+                hourlyIsDay =
+                    forecastDate >= sunriseTime &&
+                    forecastDate < sunsetTime
+                        ? 1
+                        : 0;
+            }
+
+            const iconClass =
+                getWeatherIcon(
+                    item.weatherCode,
+                    hourlyIsDay
+                );
 
             const hourlyCard = document.createElement('div');
             hourlyCard.className = 'hour';
 
             hourlyCard.innerHTML = `
-                <span class="hour-time">${hour}</span>
+                <span class="hour-time">
+                    ${forecastHour}
+                    ${isNextDay ? `<small>${nextDayDate}</small>` : ''}
+                </span>
 
                 <i class="wi ${iconClass} hour-icon"></i>
 

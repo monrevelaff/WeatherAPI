@@ -350,6 +350,13 @@ body {
     color: #6bb6ff;
 }
 
+.hour-time small {
+    display: block;
+    margin-top: 2px;
+    font-size: 9px;
+    opacity: 0.65;
+}
+
 .hourly-card {
     margin-top: 18px;
     padding: 18px;
@@ -369,6 +376,71 @@ body {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0.2px;
+}
+
+/* ==============================
+   Icon Outline Colour
+   ============================== */
+
+/* Sunrise */
+.wi-sunrise {
+    color: #ffcf70;
+}
+
+/* Sunset */
+.wi-sunset {
+    color: #ff9f68;
+}
+
+/* Clear / Sunny */
+.wi-day-sunny,
+.wi-day-sunny-overcast {
+    color: #ffd76a;
+}
+
+/* Night */
+.wi-night-clear{
+    color: #b8c7ff;
+}
+
+/* Rain / Drizzle / Showers */
+.wi-rain,
+.wi-showers,
+.wi-sprinkle,
+.wi-rain-mix,
+.wi-sleet {
+    color: #6bb6ff;
+}
+
+/* Thunderstorm / Hail */
+.wi-thunderstorm,
+.wi-hail {
+    color: #a98bff;
+}
+
+/* Snow */
+.wi-snow {
+    color: #dff6ff;
+}
+
+/* Partly Cloudy Day */
+.wi-day-cloudy {
+    color: #f4d58d;
+}
+
+/* Cloudy / Overcast */
+.wi-cloudy {
+    color: #aeb8c4;
+}
+
+/* Cloudy Night */
+.wi-night-alt-cloudy {
+    color: #9faee5;
+}
+
+/* Fog */
+.wi-fog {
+    color: #c7ced6;
 }
 
 /* ==============================

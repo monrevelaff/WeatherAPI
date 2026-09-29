@@ -84,14 +84,16 @@ def create_app(test_config=None):
         hourly_start_time = hourly.Time()
         hourly_interval = hourly.Interval()
 
-        # Create a timestamp for each hourly weather value.
+        # Create a timestamp for each hourly weather value and convert it from UTC to the local timezone.
         hourly_time_index = pd.to_datetime(
             [
                 hourly_start_time + (i * hourly_interval)
                 for i in range(len(hourly_temperature_2m))
             ],
-            unit='s'
-        ).strftime('%Y-%m-%d %H:%M').tolist()
+            unit='s',
+            utc=True
+        ).tz_convert('Asia/Singapore').strftime('%Y-%m-%d %H:%M').tolist()
+
 
         return jsonify({
             "current_time": current.Time(), 
