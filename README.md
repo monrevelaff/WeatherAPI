@@ -25,12 +25,12 @@ Weather conditions are determined using the **WMO weather codes** provided by Op
 
 ### Weather Details
 
-The application also retrieves and displays:
+The application also retrieves and displays the information of today's:
 
 - Sunrise time
 - Sunset time
-- Today's minimum temperature
-- Today's maximum temperature
+- Minimum temperature
+- Maximum temperature
 
 ### Hourly Forecast
 
@@ -113,7 +113,7 @@ The API provides:
 - Daily forecasts
 - Temperature
 - Apparent temperature
-- Rain / precipitation
+- Precipitation probability
 - Humidity
 - Sunrise and sunset
 - Weather codes
