@@ -145,3 +145,18 @@ Possible future improvements include:
 - Improve accessibility
 - Optimise API requests and caching
 - Deploy the application
+
+---
+
+## Credits
+
+### Weather Icons
+Weather icons are provided by **Weather Icons by Erik Flowers**.
+
+- [Weather Icons](https://erikflowers.github.io/weather-icons/)
+- Licensed under **SIL OFL 1.1**
+
+### Background Image
+Background photograph by **Pok Rie** on Pexels.
+
+- [View the original photo on Pexels](https://www.pexels.com/photo/scenic-coastal-town-near-river-at-sundown-6823212/)
