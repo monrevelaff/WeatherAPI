@@ -123,17 +123,20 @@ fetch('/api/weather')
     .then(response => response.json())
     .then(data => {
 
-        // Date and current time
+        // Date and current time based on the timezone from the API response
         const now = new Date();
+        const timezone = data.timezone;
 
         const date = now.toLocaleDateString('en-GB', {
             day: 'numeric',
-            month: 'long'
+            month: 'long',
+            timeZone: timezone
         });
 
         const time = now.toLocaleTimeString('en-US', {
             hour: 'numeric',
-            minute: '2-digit'
+            minute: '2-digit',
+            timeZone: timezone
         });
 
         document.getElementById('date').textContent =
@@ -157,7 +160,6 @@ fetch('/api/weather')
         document.getElementById('apparent-temperature').textContent = 
         data.apparent_temperature.toFixed(0);
        
-
         // Update daily details
         const sunriseTime = new Date(data.sunrise);
         const sunsetTime = new Date(data.sunset);
@@ -168,4 +170,61 @@ fetch('/api/weather')
         document.getElementById('sunset').textContent = sunsetFormatted;
         document.getElementById('max-temp').textContent = data.temperature_2m_max.toFixed(0);
         document.getElementById('min-temp').textContent = data.temperature_2m_min.toFixed(0);
+
+        // Update hourly forecast
+        const hourlyTimes = data.hourly_time;
+        const hourlyTemperatures = data.hourly_temperature_2m;
+        const hourlyPrecipitation = data.hourly_precipitation_probability;
+        const hourlyWeatherCodes = data.hourly_weather_code;
+
+        const hourlyForecastData = hourlyTimes.map((time, index) => {
+            time = time.replace(' ', 'T'); // Convert to ISO format
+            const temperature = hourlyTemperatures[index];
+            const precipitation = hourlyPrecipitation[index];
+            const weatherCode = hourlyWeatherCodes[index];
+            return { time, temperature, precipitation, weatherCode };
+        });
+
+        const selectedHourlyData = hourlyForecastData.filter(item => {
+            const date = new Date(item.time);
+            const hour = date.getHours();
+            return hour % 3 === 0;
+        })
+        .slice(0, 9); // Limit to the first 9 items (covering 24 hours)
+
+        // Display hourly forecast
+        const hourlyContainer = document.getElementById('hourly-forecast');
+
+        hourlyContainer.innerHTML = '';
+
+        selectedHourlyData.forEach(item => {
+            const date = new Date(item.time);
+
+            const hour = date.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                hour12: true
+            });
+
+            const iconClass = getWeatherIcon(item.weatherCode, 1);
+
+            const hourlyCard = document.createElement('div');
+            hourlyCard.className = 'hour';
+
+            hourlyCard.innerHTML = `
+                <span class="hour-time">${hour}</span>
+
+                <i class="wi ${iconClass} hour-icon"></i>
+
+                <span class="hour-temp">
+                    ${item.temperature.toFixed(0)}°
+                </span>
+
+                <span class="hour-rain">
+                    <i class="wi wi-raindrop"></i>
+                    ${item.precipitation}%
+                </span>
+            `;
+
+            hourlyContainer.appendChild(hourlyCard);
+        });
     });

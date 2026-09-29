@@ -287,46 +287,14 @@ body {
 
 
 /* ==============================
-   TOMORROW CARD
+   HOURLY FORECAST CARD
    ============================== */
-
-.tomorrow-card {
-    margin-top: 15px;
-
-    padding: 17px 18px;
-
-    border-radius: 18px;
-
-    background: rgba(210, 210, 210, 0.25);
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-
-/* Tomorrow title */
-
-.tomorrow-header {
-    margin-bottom: 14px;
-}
-
-.tomorrow-header h2 {
-    font-size: 15px;
-
-    font-weight: 600;
-}
-
-
-/* Hourly row */
 
 .hourly-preview {
     display: flex;
-
-    gap: 24px;
-
+    gap: 10px;
     overflow-x: auto;
-
-    padding-bottom: 3px;
-
+    padding: 3px 2px 8px;
     scrollbar-width: none;
 }
 
@@ -334,50 +302,74 @@ body {
     display: none;
 }
 
-
-/* Individual hour */
-
 .hour {
-    min-width: 45px;
+    flex: 0 0 70px;
+    height: 125px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
+    justify-content: center;
 
-    gap: 7px;
+    gap: 9px;
+
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10);
 }
-
-
-/* Hour time */
 
 .hour-time {
-    font-size: 11px;
-
+    font-size: 12px;
     font-weight: 500;
-
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.70);
 }
 
-
-/* Hour icon */
-
 .hour-icon {
-    font-size: 20px;
-
+    font-size: 25px;
     line-height: 1;
 }
 
-
-/* Hour temperature */
-
 .hour-temp {
-    font-size: 13px;
-
+    font-size: 17px;
     font-weight: 600;
 }
 
+.hour-rain {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.hour-rain .wi {
+    font-size: 11px;
+    color: #6bb6ff;
+}
+
+.hourly-card {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(210, 210, 210, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hourly-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.hourly-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
 
 /* ==============================
    MOBILE

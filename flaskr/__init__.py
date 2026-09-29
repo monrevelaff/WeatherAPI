@@ -1,8 +1,8 @@
 import os
 import openmeteo_requests
 import requests_cache
+import pandas as pd
 from retry_requests import retry
-
 from flask import Flask, render_template, jsonify
 
 def create_app(test_config=None):
@@ -12,7 +12,7 @@ def create_app(test_config=None):
     retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
     openmeteo = openmeteo_requests.Client(session = retry_session)
 
-    # create and configure the app
+    # Create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
@@ -20,13 +20,13 @@ def create_app(test_config=None):
     )
 
     if test_config is None:
-        # load the instance config, if it exists, when not testing
+        # Load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
     else:
-        # load the test config if passed in
+        # Load the test config if passed in
         app.config.from_mapping(test_config)
 
-    # ensure the instance folder exists
+    # Ensure the instance folder exists
     os.makedirs(app.instance_path, exist_ok=True)
 
 
@@ -35,7 +35,7 @@ def create_app(test_config=None):
         return render_template('index.html')
 
 
-    # route to the weather main page
+    # Route to the weather main page
     @app.route('/api/weather')
     def weather():
         # Make sure all required weather variables are listed here
@@ -45,11 +45,11 @@ def create_app(test_config=None):
             "latitude": 2.7297,
             "longitude": 101.9381,
             "daily": ["sunrise", "sunset", "temperature_2m_max", "temperature_2m_min"],
-            "hourly": ["temperature_2m", "rain"],
-            "models": "dwd_icon_seamless",
+            "hourly": ["temperature_2m", "precipitation_probability", "weather_code"],
             "current": ["relative_humidity_2m", "temperature_2m", "is_day", "weather_code", "apparent_temperature"],
+            "models": "dwd_icon_seamless",
             "timezone": "Asia/Singapore",
-            "forecast_days": 1,
+            "forecast_days": 2, # Reduces API payload by filtering the amount of data returned. The default is 7 days.
         }
         responses = openmeteo.weather_api(url, params = params)
 
@@ -71,17 +71,44 @@ def create_app(test_config=None):
         daily_temperature_2m_max = daily.Variables(2).Values(0)
         daily_temperature_2m_min = daily.Variables(3).Values(0)
 
+        # Process hourly data. The order of variables needs to be the same as requested.
+        hourly = response.Hourly()
+        hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy().tolist()
+        hourly_precipitation_probability = hourly.Variables(1).ValuesAsNumpy().tolist()
+        hourly_weather_code = hourly.Variables(2).ValuesAsNumpy().tolist()
+
+        #For debug
+        # print(dir(hourly))
+
+        # Get the starting Unix timestamp and interval between hourly values.
+        hourly_start_time = hourly.Time()
+        hourly_interval = hourly.Interval()
+
+        # Create a timestamp for each hourly weather value.
+        hourly_time_index = pd.to_datetime(
+            [
+                hourly_start_time + (i * hourly_interval)
+                for i in range(len(hourly_temperature_2m))
+            ],
+            unit='s'
+        ).strftime('%Y-%m-%d %H:%M').tolist()
+
         return jsonify({
             "current_time": current.Time(), 
+            "timezone": "Asia/Singapore",
             "relative_humidity_2m": current_relative_humidity_2m,
-            "temperature_2m": current_temperature_2m,
+            "temperature_2m": current_temperature_2m, 
             "is_day": current_is_day,
             "weather_code": current_weather_code,
             "apparent_temperature": current_apparent_temperature,
             "sunrise": daily_sunrise,
             "sunset": daily_sunset,
             "temperature_2m_max": daily_temperature_2m_max,
-            "temperature_2m_min": daily_temperature_2m_min
+            "temperature_2m_min": daily_temperature_2m_min,
+            "hourly_temperature_2m": hourly_temperature_2m,
+            "hourly_precipitation_probability": hourly_precipitation_probability,
+            "hourly_weather_code": hourly_weather_code,
+            "hourly_time": hourly_time_index
         })
 
     return app

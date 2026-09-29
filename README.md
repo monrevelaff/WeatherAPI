@@ -28,6 +28,29 @@ The application also retrieves and displays:
 - Today's minimum temperature
 - Today's maximum temperature
 
+### Hourly Forecast
+
+The application displays a **24-hour hourly forecast** using weather data retrieved from Open-Meteo.
+
+The hourly forecast includes:
+
+- Time
+- Temperature
+- Precipitation probability
+- Weather condition icon
+
+The forecast is displayed at three-hour intervals, covering:
+
+- 12 AM
+- 3 AM
+- 6 AM
+- 9 AM
+- 12 PM
+- 3 PM
+- 6 PM
+- 9 PM
+- 12 AM
+
 ### Weather Icons
 
 Weather icons are dynamically selected based on the weather code.
@@ -45,12 +68,6 @@ For example:
 
 The day/night state is also taken into account when displaying appropriate icons.
 
-### Tomorrow / Hourly Forecast
-
-The UI includes a section for displaying tomorrow's hourly forecast.
-
-The project is currently being developed further to dynamically populate the hourly forecast data.
-
 ---
 
 ## Technologies Used
@@ -60,12 +77,18 @@ The project is currently being developed further to dynamically populate the hou
 - **Python**
 - **Flask**
 - **Open-Meteo API**
+- `openmeteo_requests`
+- `requests_cache`
+- `retry_requests`
+- `pandas`
 
 ### Frontend
 
 - **HTML5**
 - **CSS3**
 - **JavaScript**
+- **Weather Icons by Erik Flowers**
+
 
 ### Development Tools
 
@@ -93,19 +116,26 @@ The API provides:
 
 The application uses the following Open-Meteo concepts:
 
+```text
 current
 hourly
 daily
 
-## Project Status
+## Future Improvements
 
-Work in progress
+Possible future improvements include:
 
-Future Improvements:
-- Complete hourly forecast
-- Add sunrise and sunset
-- Add minimum and maximum temperature
-- Add humidity and wind information
-- Add location search
-- Improve error handling
+- Add humidity information to the weather interface
+- Add wind speed and wind direction
+- Add a location search feature
+- Allow users to search for weather in different cities
+- Add automatic location detection
+- Improve API error handling
+- Add loading and error states to the interface
+- Add more detailed weather forecasts
+- Improve mobile and responsive design
+- Add weather animations and visual effects
+- Add a dark/light theme option
+- Improve accessibility
+- Optimise API requests and caching
 - Deploy the application
